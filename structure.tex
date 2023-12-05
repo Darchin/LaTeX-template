@@ -1,0 +1,118 @@
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+\usepackage[dvipsnames]{xcolor}
+\usepackage{mathtools,amssymb,bm,mathstyle,extarrows} % Math packages
+\usepackage[shortlabels]{enumitem}
+\usepackage{float}
+\usepackage{etoolbox}
+\usepackage{cancel}
+\usepackage{listings}
+\usepackage{array}
+\usepackage{fancyhdr}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{xstring} % Used for nested ifthenelse conditionals
+\usepackage{hyperref}
+\input{title-config.tex}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT MARGINS
+%----------------------------------------------------------------------------------------
+
+\usepackage{geometry} % Required for adjusting page dimensions and margins
+
+\geometry{
+	paper=a4paper, % Paper size, change to letterpaper for US letter size
+	top=3.5cm, % Top margin
+	bottom=2.5cm, % Bottom margin
+	left=2cm, % Left margin
+	right=2cm, % Right margin
+	headheight=28pt, % Header height
+	footskip=1.5cm, % Space from the bottom margin to the baseline of the footer
+	headsep=0.5cm, % Space from the top margin to the baseline of the header
+	% showframe, % Uncomment to show how the type block is set on the page
+}
+
+%----------------------------------------------------------------------------------------
+%	XePersian Load/Setup
+%----------------------------------------------------------------------------------------
+\usepackage{xepersian}
+\settextfont{XB Roya}
+
+%----------------------------------------------------------------------------------------
+%	PACKAGE POST-CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+% Listings configuration
+\lstset{
+	basicstyle=\ttfamily, % Typeset listings in monospace font
+}
+
+% Setspace configuration
+\onehalfspacing
+
+% Fancyhdr configuration
+\pagestyle{fancyplain}
+\fancyhead[L]{\theassignment \vspace{0.3ex}}
+\fancyhead[C]{\thesubject \vspace{0.3ex}}
+\fancyhead[R]{\rl{سوال \thesection} \vspace{0.3ex}}
+\fancyfoot[C]{\rl{\thepage}}
+
+% Hyperref configuration
+\hypersetup{
+	colorlinks = true,
+}
+
+%----------------------------------------------------------------------------------------
+%	CUSTOM COMMANDS
+%----------------------------------------------------------------------------------------
+% Convenience commands
+\newcommand{\newquestion}{\section{}}
+\newcommand{\newsubquestion}{\subsection{}}
+\newcommand{\stext}[1]{{\text{\small#1}}}
+
+% Maths operators
+\newcommand*{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand*{\ceil}[1]{\left\lceil #1 \right\rceil}
+
+% Augmented Matrices (uses 'array')
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+	\hskip -\arraycolsep
+	\let\@ifnextchar\new@ifnextchar
+	\array{#1}}
+\makeatother
+
+% Make all cancel arrows have same slope {uses 'cancel'}
+\makeatletter
+\DeclareRobustCommand\cancel[2][0]{%
+  \ifmmode
+    \mkern-#1mu
+    \mathpalette{\@cancel{\@can@slash{}}}{\mkern#1mu #2 \mkern#1mu}%
+    \mkern-#1mu
+  \else
+    \dimen@=\dimexpr 1em*#1/18\relax
+    \kern-\dimen@
+    \@cancel{\@can@slash{}}\hbox{\kern\dimen@ #2\kern\dimen@}%
+    \kern-\dimen@
+  \fi}
+\makeatother
+
+%----------------------------------------------------------------------------------------
+%	ENVIRONMENT MODIFICATIONS
+%----------------------------------------------------------------------------------------
+\AtBeginEnvironment{align}{\setcounter{equation}{0}} % Make each align environment restart counter from 0
+
+
+%----------------------------------------------------------------------------------------
+%	TITLESEC MODIFICATIONS
+%----------------------------------------------------------------------------------------
+
+% Do not renew the 'counter' commands such as thesection,thechapter,... as it will lead to many unwanted side effects
+% Use value{<command>} wherever needed instead
+
+\titleformat{\section}[hang]{\normalfont\Huge\bfseries}{سوال \tartibinumeral{\value{section}}}{.5em}{}
+\titlespacing{\section}{0pt}{0pt}{4em}
+
+\titleformat{\subsection}[hang]{\normalfont\Large\bfseries}{\thesection\ --\ \harfinumeral{\value{subsection}}\hspace{0.3ex})}{0pt}{}

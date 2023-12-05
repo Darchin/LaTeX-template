@@ -1,0 +1,31 @@
+\makeatletter
+% Assign an acronym to your subjects of choice here
+\newcommand{\subject}[1]{
+	\IfEqCase{#1}{
+		{nla}{\gdef\thesubject{جبر خطی عددی}}
+		{lp}{\gdef\thesubject{بهینه‌سازی خطی}}
+		{aa}{\gdef\thesubject{مبانی جبر}}
+		{csf}{\gdef\thesubject{اصول سیستم‌های کامپیوتری}}
+	}[\PackageError{subject}{Undefined option to subject: #1}{}]
+}
+% Change the commands below to modify how the title page is displayed
+\newcommand{\assignment}[1]{\gdef\theassignment{تمارین سری \tartibinumeral{#1}}}
+\newcommand{\studentno}[1]{\gdef\thestudentno{#1}}
+\newcommand{\MakeCustomTitle}{%
+	\newpage
+	\null
+	\vskip 6cm
+	\begin{center}
+		{\color{RoyalBlue} \Huge \thesubject \par}
+		\vskip 0.3cm
+		{\color{CornflowerBlue} \Large \theassignment \par}
+		\vskip 0.5cm
+		{\large \@author \par}
+		\vskip 0.2cm
+		{\large \thestudentno \par}
+	\end{center}
+	\thispagestyle{empty}
+	\clearpage
+	\setcounter{page}{1}
+}
+\makeatother
