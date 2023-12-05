@@ -14,7 +14,7 @@ properly. I will eventually get around to finding the sources of the prior snipp
 Having said all this, if you wanted to modify and/or use this template, you can go ahead and do so no citations needed, as I don't think this is an original enough template.
 
 ### Problems with the template
-Currently, I think there a few more noticeable issues with the template.
+Currently, I think there are a few more noticeable issues with the template.
 One is the listings package configuration, which I think is pretty hideous and I will certainly change later, whenever the next project that requires embedding code rolls around.
 
 Second area of improvement is probably the title page, although I intentionally made it simple-looking, as I do not use this template for larger projects and such, and I didn't think
